@@ -1,19 +1,25 @@
 const express = require('express');
-const socketIO = require('socket.io');
 const path = require('path');
-const http = require('http');
 
 const app = express();
-let server = http.createServer(app);
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+
 
 const publicPath = path.resolve(__dirname, '../public');
 const port = process.env.PORT || 3000;
 
 app.use(express.static(publicPath));
 
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
 
+io.on('connection', function(socket) {
+    console.log('a user connected');
+});
 
-app.listen(port, (err) => {
+http.listen(port, (err) => {
 
     if (err) throw new Error(err);
 

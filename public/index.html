@@ -5,12 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Programa de Colas</title>
+    <title>Queue Program</title>
 </head>
 
 <body>
-    <h1>Programa de Colas</h1>
+    <h1>Queue Program with socket.io</h1>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
 
+        socket.on('connect', () => {
+            console.log('connecting at backend');
+        });
+    </script>
 </body>
 
 </html>
