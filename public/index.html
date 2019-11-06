@@ -17,6 +17,10 @@
         socket.on('connect', () => {
             console.log('connecting at backend');
         });
+
+        socket.on('disconnect', () => {
+            console.log('lost connecting');
+        });
     </script>
 </body>
 
