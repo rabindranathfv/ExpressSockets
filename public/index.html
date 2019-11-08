@@ -21,6 +21,12 @@
         socket.on('disconnect', () => {
             console.log('lost connecting');
         });
+
+        // emit data to server
+        socket.emit('sendMessage', {
+            user: 'rabindranath',
+            menssage: 'better backend everyday'
+        });
     </script>
 </body>
 
