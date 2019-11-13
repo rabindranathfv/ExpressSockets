@@ -11,7 +11,7 @@ socket.on('disconnect', () => {
 // emit data to server
 socket.emit('sendMessage', {
     user: 'rabindranath',
-    menssage: 'better backend everyday'
+    message: 'better backend everyday'
 }, (resp) => {
     console.log(resp.resp);
 });
