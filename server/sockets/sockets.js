@@ -14,7 +14,10 @@ io.on('connection', function(socketClient) {
 
     // listen client
     socketClient.on('sendMessage', (socketData, callback) => {
-        console.log(socketData);
+        console.log(` socket data ${socketData.user} ${socketData.message}`);
+
+        /* socketClient.broadcast.emit('sendMessage', socketData);
+        console.log('despues del broadcast'); */
         if (socketData.user) {
             callback({
                 ok: true,
