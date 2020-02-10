@@ -23,6 +23,7 @@ io.on('connection', function(socketClient) {
     });
 
     socketClient.emit('currentState', {
-        currentTicket: ticketCtrl.getLastTicket()
+        ticketId: ticketCtrl.getLastTicket(),
+        currentTicket: `Ticket ${ticketCtrl.getLastTicket()}`
     });
 });

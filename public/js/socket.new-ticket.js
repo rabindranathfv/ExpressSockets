@@ -12,7 +12,6 @@ socket.on('disconnect', function() {
 
 socket.on('currentState', function(data) {
     console.log('grab currentState');
-    console.log('data from socket', data.currentTicket);
     label.text(data.currentTicket);
 });
 

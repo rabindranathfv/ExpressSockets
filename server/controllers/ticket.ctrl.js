@@ -24,7 +24,7 @@ class TicketCtrl {
     }
 
     getLastTicket() {
-        return `Ticket ${this.latest}`;
+        return this.latest;
     }
 
     saveFile() {
