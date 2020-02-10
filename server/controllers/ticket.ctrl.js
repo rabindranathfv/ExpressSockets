@@ -15,12 +15,14 @@ class TicketCtrl {
         this.latest = 0;
         this.today = new Date().getDate();
         this.ticketsPending = [];
+        this.latestTickets = [];
         let data = require('../data/data.json');
         console.log(data);
 
         if (data.today === this.today) {
             this.latest = data.latest;
             this.ticketsPending = data.ticketsPending;
+            this.ticketsPending = data.latestTickets;
         } else {
             this.resetTickets();
         }
@@ -39,11 +41,36 @@ class TicketCtrl {
         return this.latest;
     }
 
+    takeTicket(desk) {
+        if (this.ticketsPending.length === 0) {
+            return {
+                ok: true,
+                message: `there is not tickets pending`
+            }
+        }
+        let numTicket = this.ticketsPending.shift().ticketNumber;
+        // this.ticketsPending.shift();
+
+        let takeTicket = new Ticket(numTicket, desk);
+        this.latestTickets.unshift(takeTicket);
+
+        if (this.latestTickets.length > 4) {
+            this.latestTickets.splice(-1, 1);
+        }
+
+        console.log('latest tickets', this.latestTickets);
+
+        this.saveFile();
+
+        return takeTicket;
+    }
+
     saveFile() {
         let jsonData = {
             latest: this.latest,
             today: this.today,
-            ticketsPending: this.ticketsPending
+            ticketsPending: this.ticketsPending,
+            latestTickets: this.latestTickets
         };
 
         let jsonDataStr = JSON.stringify(jsonData);
