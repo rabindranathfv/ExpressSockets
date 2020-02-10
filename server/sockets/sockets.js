@@ -1,7 +1,12 @@
 const { io } = require('../server');
+const { TicketCtrl } = require('../controllers/ticket.ctrl');
+
+let ticket = new TicketCtrl();
 
 io.on('connection', function(socketClient) {
     console.log('a user connected');
+
+
 
     socketClient.emit('sendMessageServer', {
         user: 'admin',
