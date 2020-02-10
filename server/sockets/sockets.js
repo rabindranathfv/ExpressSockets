@@ -21,4 +21,8 @@ io.on('connection', function(socketClient) {
         console.log(` new ticket ${next}`);
         callback(next);
     });
+
+    socketClient.emit('currentState', {
+        currentTicket: ticketCtrl.getLastTicket()
+    });
 });

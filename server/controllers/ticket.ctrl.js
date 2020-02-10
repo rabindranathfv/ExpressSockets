@@ -23,6 +23,10 @@ class TicketCtrl {
         return `Ticket ${this.latest}`;
     }
 
+    getLastTicket() {
+        return `Ticket ${this.latest}`;
+    }
+
     saveFile() {
         let jsonData = {
             latest: this.latest,
