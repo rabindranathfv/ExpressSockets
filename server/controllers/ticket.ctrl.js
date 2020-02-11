@@ -43,6 +43,10 @@ class TicketCtrl {
         return this.latest;
     }
 
+    getlatestTickets() {
+        return this.latestTickets;
+    }
+
     takeTicket(desk) {
         if (this.ticketsPendings.length <= 0) {
             return {

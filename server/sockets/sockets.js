@@ -24,7 +24,8 @@ io.on('connection', function(socketClient) {
 
     socketClient.emit('currentState', {
         ticketId: ticketCtrl.getLastTicket(),
-        currentTicket: `Ticket ${ticketCtrl.getLastTicket()}`
+        currentTicket: `Ticket ${ticketCtrl.getLastTicket()}`,
+        latestTickets: ticketCtrl.getlatestTickets()
     });
 
     socketClient.on('recieveTicket', (socketData, callback) => {
