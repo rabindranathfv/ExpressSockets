@@ -19,6 +19,8 @@ socket.on('currentState', function(resp) {
 });
 
 socket.on('latestTickets', function(resp) {
+    var audio = new Audio('../audio/new-ticket.mp3');
+    audio.play();
     updateView(resp.latestTickets);
 });
 
