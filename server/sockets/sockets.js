@@ -40,13 +40,17 @@ io.on('connection', function(socketClient) {
         let grabTicket = ticketCtrl.takeTicket(socketData.desk);
         callback(grabTicket);
 
+        socketClient.broadcast.emit('latestTickets', {
+            currentTicket: `Ticket ${ticketCtrl.getLastTicket()}`,
+            latestTickets: ticketCtrl.getlatestTickets()
+        });
 
     });
 
-    socketClient.emit('latestTickets', {
-        currentTicket: `Ticket ${ticketCtrl.getLastTicket()}`,
-        latestTickets: ticketCtrl.getlatestTickets()
-    });
+    // socketClient.emit('latestTickets', {
+    //     currentTicket: `Ticket ${ticketCtrl.getLastTicket()}`,
+    //     latestTickets: ticketCtrl.getlatestTickets()
+    // });
 
 
 });
