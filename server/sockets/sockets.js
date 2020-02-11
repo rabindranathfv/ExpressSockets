@@ -26,4 +26,17 @@ io.on('connection', function(socketClient) {
         ticketId: ticketCtrl.getLastTicket(),
         currentTicket: `Ticket ${ticketCtrl.getLastTicket()}`
     });
+
+    socketClient.on('recieveTicket', (socketData, callback) => {
+        console.log('socket event recieveTicket', socketData);
+        if (!socketData.desk) {
+            return callback({
+                err: true,
+                message: 'the desk is mandatory'
+            });
+        }
+
+        let grabTicket = ticketCtrl.takeTicket(socketData.desk);
+        callback(grabTicket);
+    })
 });

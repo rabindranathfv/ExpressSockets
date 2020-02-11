@@ -14,15 +14,15 @@ class TicketCtrl {
 
         this.latest = 0;
         this.today = new Date().getDate();
-        this.ticketsPending = [];
+        this.ticketsPendings = [];
         this.latestTickets = [];
         let data = require('../data/data.json');
         console.log(data);
 
         if (data.today === this.today) {
             this.latest = data.latest;
-            this.ticketsPending = data.ticketsPending;
-            this.ticketsPending = data.latestTickets;
+            this.ticketsPendings = data.ticketsPendings;
+            this.latestTickets = data.latestTickets;
         } else {
             this.resetTickets();
         }
@@ -31,7 +31,9 @@ class TicketCtrl {
     nextTicket() {
         this.latest += 1;
         let ticket = new Ticket(this.latest, null);
-        this.ticketsPending.push(ticket);
+        console.log(' new ticket ', ticket);
+        this.ticketsPendings.push(ticket);
+        console.log('new pending tickets list', this.ticketsPendings);
         this.saveFile();
 
         return `Ticket ${this.latest}`;
@@ -42,14 +44,17 @@ class TicketCtrl {
     }
 
     takeTicket(desk) {
-        if (this.ticketsPending.length === 0) {
+        console.log(require('../data/data.json'));
+        console.log(this.ticketsPendings);
+        if (this.ticketsPendings.length <= 0) {
             return {
                 ok: true,
                 message: `there is not tickets pending`
             }
         }
-        let numTicket = this.ticketsPending.shift().ticketNumber;
-        // this.ticketsPending.shift();
+        let numTicket = this.ticketsPendings.shift().ticketNumber;
+
+        console.log('ticker number', numTicket);
 
         let takeTicket = new Ticket(numTicket, desk);
         this.latestTickets.unshift(takeTicket);
@@ -69,10 +74,10 @@ class TicketCtrl {
         let jsonData = {
             latest: this.latest,
             today: this.today,
-            ticketsPending: this.ticketsPending,
+            ticketsPendings: this.ticketsPendings,
             latestTickets: this.latestTickets
         };
-
+        console.log('saving this data', jsonData);
         let jsonDataStr = JSON.stringify(jsonData);
 
         fs.writeFileSync('./server/data/data.json', jsonDataStr);
