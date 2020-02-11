@@ -18,5 +18,10 @@ var label = $('small');
 $('button').on('click', function() {
     socket.emit('recieveTicket', { desk: desk }, function(resp) {
         console.log(resp);
+        if (!resp.ticketNumber) {
+            label.text('no more tickets');
+            alert('no more tickets');
+        }
+        label.text('Ticket ' + resp.ticketNumber);
     });
 });

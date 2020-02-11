@@ -44,8 +44,6 @@ class TicketCtrl {
     }
 
     takeTicket(desk) {
-        console.log(require('../data/data.json'));
-        console.log(this.ticketsPendings);
         if (this.ticketsPendings.length <= 0) {
             return {
                 ok: true,
@@ -77,11 +75,9 @@ class TicketCtrl {
             ticketsPendings: this.ticketsPendings,
             latestTickets: this.latestTickets
         };
-        console.log('saving this data', jsonData);
         let jsonDataStr = JSON.stringify(jsonData);
 
         fs.writeFileSync('./server/data/data.json', jsonDataStr);
-
     }
 
     resetTickets() {
