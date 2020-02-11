@@ -17,9 +17,9 @@ io.on('connection', function(socketClient) {
 
     // listen client
     socketClient.on('nextTicket', (socketData, callback) => {
-        let next = ticketCtrl.nextTicket();
+        let nextTck = ticketCtrl.nextTicket();
         console.log(` new ticket ${next}`);
-        callback(next);
+        callback(nextTck);
     });
 
     socketClient.emit('currentState', {
@@ -39,5 +39,14 @@ io.on('connection', function(socketClient) {
 
         let grabTicket = ticketCtrl.takeTicket(socketData.desk);
         callback(grabTicket);
-    })
+
+
+    });
+
+    socketClient.emit('latestTickets', {
+        currentTicket: `Ticket ${ticketCtrl.getLastTicket()}`,
+        latestTickets: ticketCtrl.getlatestTickets()
+    });
+
+
 });

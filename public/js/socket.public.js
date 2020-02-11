@@ -18,11 +18,13 @@ socket.on('currentState', function(resp) {
     updateView(resp.latestTickets);
 });
 
+socket.on('latestTickets', function(resp) {
+    updateView(resp.latestTickets);
+});
+
 function updateView(latestTickets) {
     for (var index = 0; index < latestTickets.length; index++) {
         lblTickets[index].text('Ticket ' + latestTickets[index].ticketNumber);
         lblDesks[index].text('Desk ' + latestTickets[index].desk);
-        console.log(latestTickets[index].ticketNumber, latestTickets[index].desk);
-
     }
 }
