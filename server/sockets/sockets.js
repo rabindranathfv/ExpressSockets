@@ -40,6 +40,7 @@ io.on('connection', function(socketClient) {
         let grabTicket = ticketCtrl.takeTicket(socketData.desk);
         callback(grabTicket);
 
+        // you can use emit in (1)
         socketClient.broadcast.emit('latestTickets', {
             currentTicket: `Ticket ${ticketCtrl.getLastTicket()}`,
             latestTickets: ticketCtrl.getlatestTickets()
@@ -47,10 +48,10 @@ io.on('connection', function(socketClient) {
 
     });
 
+    // this (1) work the same instead using with broadcast
     // socketClient.emit('latestTickets', {
     //     currentTicket: `Ticket ${ticketCtrl.getLastTicket()}`,
     //     latestTickets: ticketCtrl.getlatestTickets()
     // });
-
 
 });
