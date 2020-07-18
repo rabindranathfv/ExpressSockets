@@ -1,7 +1,11 @@
 # Notes:
 
-Simple socket server using socket.io
+Simple API Rest socket server using socket.io for using broadcast concepts, multicast, etc.
 
-```
-npm install
-```
+## Development server
+
+Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files
+
+## Dependecies
+
+Run `npm install` for install all dependencies
